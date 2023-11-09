@@ -2,9 +2,9 @@ import LogoSVG from "../icons/LogoSVG";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center gap-10 bg-[#232127] py-10">
+    <footer className="flex flex-col items-center gap-10 bg-[#232127] py-10 lg:flex-row lg:items-start lg:justify-center">
       <LogoSVG fill={"white"} />
-      <div className="flex flex-col gap-4 text-center">
+      <div className="flex flex-col gap-4 text-center lg:pl-20 lg:text-left">
         <h4 className="font-bold text-white">Features</h4>
         <a href="#" className="text-[#BFBFBF]">
           Link Shortening
@@ -16,7 +16,7 @@ export default function Footer() {
           Analytics
         </a>
       </div>
-      <div className="flex flex-col gap-4 text-center">
+      <div className="flex flex-col gap-4 text-center lg:text-left">
         <h4 className="font-bold text-white">Resources</h4>
         <a href="#" className="text-[#BFBFBF]">
           Blog
@@ -28,7 +28,7 @@ export default function Footer() {
           Support
         </a>
       </div>
-      <div className="flex flex-col gap-4 text-center">
+      <div className="flex flex-col gap-4 text-center lg:text-left">
         <h4 className="font-bold text-white">Company</h4>
         <a href="#" className="text-[#BFBFBF]">
           About

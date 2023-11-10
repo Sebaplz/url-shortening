@@ -2,7 +2,7 @@ import LogoSVG from "../icons/LogoSVG";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center gap-10 bg-[#232127] py-10 lg:flex-row lg:items-start lg:justify-center">
+    <footer className="flex flex-col items-center gap-10 bg-[#232127] py-10 lg:flex-row lg:items-start lg:justify-center 2xl:gap-20">
       <LogoSVG fill={"white"} />
       <div className="flex flex-col gap-4 text-center lg:pl-20 lg:text-left">
         <h4 className="font-bold text-white">Features</h4>

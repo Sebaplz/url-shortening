@@ -9,7 +9,7 @@ export default function Header() {
   };
 
   return (
-    <header className="px-4 py-8 lg:px-16">
+    <header className="px-4 py-8 lg:px-16 xl:px-24 2xl:px-40">
       <nav className="flex items-center justify-between lg:justify-start">
         <LogoSVG fill={"#232127"} width={150} />
         <button onClick={handleMenu} className="block lg:hidden">

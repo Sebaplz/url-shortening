@@ -1,7 +1,7 @@
 export default function Card() {
   return (
     <div className="flex flex-col gap-24 lg:flex-row lg:gap-8">
-      <article className="relative h-auto rounded-md bg-white p-4 lg:h-[250px]">
+      <article className="relative h-auto rounded-md bg-white p-4 lg:h-[250px] xl:h-[200px]">
         <div
           className={`absolute -top-10 left-1/2 h-[85px] w-[85px] -translate-x-1/2 rounded-full bg-[#3B3054] bg-[url('/icon-brand-recognition.svg')] bg-center bg-no-repeat lg:left-[25%]`}
         ></div>
@@ -15,7 +15,7 @@ export default function Card() {
         <div className="absolute -bottom-[70px] left-1/2 h-[70px] w-[10px] -translate-x-1/2 bg-[#2ACFCF] lg:hidden"></div>
         <div className="absolute -right-[70px] top-20 hidden h-[10px] w-[70px] bg-[#2ACFCF] lg:block"></div>
       </article>
-      <article className="relative rounded-md bg-white p-4 lg:mt-10 lg:h-[250px]">
+      <article className="relative rounded-md bg-white p-4 lg:mt-10 lg:h-[250px] xl:h-[200px]">
         <div
           className={`absolute -top-10 left-1/2 h-[85px] w-[85px] -translate-x-1/2 rounded-full bg-[#3B3054] bg-[url('/icon-brand-recognition.svg')] bg-center bg-no-repeat lg:left-[25%]`}
         ></div>

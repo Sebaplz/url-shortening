@@ -15,7 +15,7 @@ export default function Hero() {
         </p>
         <a
           href="#"
-          className="w-36 rounded-full  bg-[#2ACFCF] p-2 text-white lg:text-center 2xl:text-xl"
+          className="w-36 rounded-full  bg-[#2ACFCF] p-2 text-white hover:opacity-50 lg:text-center 2xl:text-xl"
         >
           Get Started
         </a>

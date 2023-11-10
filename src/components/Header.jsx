@@ -18,7 +18,7 @@ export default function Header() {
 
         {/* Menú mobile*/}
         <ul
-          className={`absolute top-20 flex w-[92%] flex-col items-center gap-6 rounded-lg bg-[#3B3054] py-8 text-white md:w-[96%] ${
+          className={`absolute top-20 flex w-[92%] flex-col items-center gap-6 rounded-lg bg-[#3B3054] py-8 text-white md:w-[96%] lg:hidden ${
             isMenuOpen ? "" : "hidden"
           }`}
         >
@@ -46,31 +46,31 @@ export default function Header() {
         <div className="hidden lg:flex lg:w-full lg:items-center lg:justify-between lg:pl-4">
           <ul className="flex gap-4">
             <li>
-              <a href="#" className="font-bold text-[#BFBFBF]">
+              <a href="#" className="font-bold text-[#BFBFBF] hover:text-black">
                 Features
               </a>
             </li>
             <li>
-              <a href="#" className="font-bold text-[#BFBFBF]">
+              <a href="#" className="font-bold text-[#BFBFBF] hover:text-black">
                 Pricing
               </a>
             </li>
             <li>
-              <a href="#" className="font-bold text-[#BFBFBF]">
+              <a href="#" className="font-bold text-[#BFBFBF] hover:text-black">
                 Resources
               </a>
             </li>
           </ul>
           <ul className="flex items-center gap-4">
             <li>
-              <a href="#" className="font-bold text-[#BFBFBF]">
+              <a href="#" className="font-bold text-[#BFBFBF] hover:text-black">
                 Login
               </a>
             </li>
             <li>
               <button
                 href="#"
-                className="w-24 rounded-full bg-[#2ACFCF] p-2 font-bold text-white"
+                className="w-24 rounded-full bg-[#2ACFCF] p-2 font-bold text-white hover:opacity-50"
               >
                 Sign Up
               </button>

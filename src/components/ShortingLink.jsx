@@ -12,7 +12,7 @@ export default function ShortingLink() {
           placeholder="Shorten a link here..."
           className="w-full rounded-md p-2"
         />
-        <button className="w-full rounded-md bg-[#2ACFCF] p-2 font-bold text-white lg:w-[200px]">
+        <button className="w-full rounded-md bg-[#2ACFCF] p-2 font-bold text-white hover:bg-[#84d6d6] lg:w-[200px]">
           Shorten It!
         </button>
       </article>

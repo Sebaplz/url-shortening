@@ -16,6 +16,7 @@ export default function ShortingLink() {
     e.preventDefault();
     if (inputLink.trim() !== "") {
       fetchLink(inputLink);
+      setInputLink("");
     } else {
       setError("Please add a link");
     }
@@ -32,6 +33,11 @@ export default function ShortingLink() {
       .catch((err) => {
         console.error("Error copying to clipboard:", err);
       });
+  };
+
+  const handleRemove = (id) => {
+    const updateLinks = links.filter((link) => link.id !== id);
+    setLinks(updateLinks);
   };
 
   async function fetchLink(url) {
@@ -127,6 +133,12 @@ export default function ShortingLink() {
               }`}
             >
               {copiedButton === link.id ? "Copied!" : "Copy"}
+            </button>
+            <button
+              className="mt-2 w-full rounded-md bg-red-700 p-2 font-bold text-white hover:opacity-50 lg:mt-0 lg:w-[100px]"
+              onClick={() => handleRemove(link.id)}
+            >
+              Remove
             </button>
           </div>
         </article>

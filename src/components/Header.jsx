@@ -1,5 +1,6 @@
 import { useState } from "react";
 import LogoSVG from "../icons/LogoSVG";
+import MenuMobile from "../icons/MenuMobile";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ export default function Header() {
       <nav className="flex items-center justify-between lg:justify-start">
         <LogoSVG fill={"#232127"} width={150} />
         <button onClick={handleMenu} className="block lg:hidden">
-          <img src="/menu.svg" alt="svg de menú" className="h-8 w-8" />
+          <MenuMobile className="h-8 w-8" />
         </button>
 
         {/* Menú mobile*/}

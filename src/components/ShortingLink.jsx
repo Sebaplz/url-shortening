@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ShortingLink() {
   const [inputLink, setInputLink] = useState("");
-
-  const [shortLink, setShortLink] = useState("");
   const [errorFetch, setErrorFetch] = useState("");
   const [error, setError] = useState("");
+  const [links, setLinks] = useState([]);
+  const [copiedButton, setCopiedButton] = useState(null);
 
   const handleChange = (e) => {
     setInputLink(e.target.value);
@@ -21,29 +21,69 @@ export default function ShortingLink() {
     }
   };
 
+  const handleCopy = (id) => {
+    const copyLink = links.find((link) => link.id === id);
+
+    navigator.clipboard
+      .writeText(copyLink.short)
+      .then(() => {
+        setCopiedButton(id);
+      })
+      .catch((err) => {
+        console.error("Error copying to clipboard:", err);
+      });
+  };
+
   async function fetchLink(url) {
-    const apiUrl = "https://cleanuri.com/api/v1/shorten";
-    const params = new URLSearchParams();
-    params.append("url", encodeURIComponent(url));
+    const urlBase = "https://url-shortener-service.p.rapidapi.com/shorten";
+    const options = {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+        "X-RapidAPI-Key": import.meta.env.VITE_KEY,
+        "X-RapidAPI-Host": "url-shortener-service.p.rapidapi.com",
+      },
+      body: new URLSearchParams({
+        url: url,
+      }),
+    };
 
     try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        body: params,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Error al acortar la URL");
+      const response = await fetch(urlBase, options);
+      if (response.ok) {
+        const result = await response.json();
+        setErrorFetch(null);
+        setLinks([
+          ...links,
+          {
+            id: crypto.randomUUID(),
+            original: inputLink,
+            short: result.result_url,
+          },
+        ]);
+      } else if (response.status === 400) {
+        const errorResult = await response.json();
+        setErrorFetch(errorResult.error);
+      } else {
+        throw new Error(`Request error: ${response.status}`);
       }
-      const data = await response.json();
-      setShortLink(data.result_url);
-      setErrorFetch(null);
-    } catch (e) {
-      setErrorFetch(e.message);
+    } catch (error) {
+      console.log(error);
     }
   }
+
+  // Cargar los links desde el localStorage al cargar el componente
+  useEffect(() => {
+    const storedLinks = localStorage.getItem("shortLinks");
+    if (storedLinks) {
+      setLinks(JSON.parse(storedLinks));
+    }
+  }, []);
+
+  // Guardar los links en el localStorage cuando el array se actualiza
+  useEffect(() => {
+    localStorage.setItem("shortLinks", JSON.stringify(links));
+  }, [links]);
 
   return (
     <section
@@ -71,18 +111,26 @@ export default function ShortingLink() {
           </button>
         </article>
       </form>
-      {shortLink && (
-        <article className="mx-4 flex flex-col gap-2 rounded-md bg-white lg:mx-0 lg:flex-row lg:items-center lg:justify-between lg:py-2">
-          <p className="truncate px-4 pb-2 pt-4 lg:pt-2">{inputLink}</p>
+      {links.map((link) => (
+        <article
+          key={link.id}
+          className="mx-4 flex flex-col gap-2 rounded-md bg-white lg:mx-0 lg:flex-row lg:items-center lg:justify-between lg:py-2"
+        >
+          <p className="truncate px-4 pb-2 pt-4 lg:pt-2">{link.original}</p>
           <div className="h-[1px] w-full bg-[#BFBFBF] lg:hidden"></div>
           <div className="px-4 pb-4 pt-2 lg:flex lg:items-center lg:gap-2 lg:pb-0 lg:pt-0">
-            <p className="text-[#2ACFCF]">{shortLink}</p>
-            <button className="mt-2 w-full rounded-md bg-[#2ACFCF] p-2 font-bold text-white hover:bg-[#3B3054] lg:mt-0 lg:w-[100px]">
-              Copy
+            <p className="text-[#2ACFCF]">{link.short}</p>
+            <button
+              onClick={() => handleCopy(link.id)}
+              className={`mt-2 w-full rounded-md bg-[#2ACFCF] p-2 font-bold text-white hover:bg-[#3B3054] lg:mt-0 lg:w-[100px] ${
+                copiedButton === link.id ? "bg-[#3B3054]" : ""
+              }`}
+            >
+              {copiedButton === link.id ? "Copied!" : "Copy"}
             </button>
           </div>
         </article>
-      )}
+      ))}
 
       {errorFetch && (
         <p className="text-center text-red-500">Error: {errorFetch}</p>
